@@ -1,0 +1,105 @@
+body {
+  background-color: black;
+}
+
+.App {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.map {
+  position: relative;
+  height: 480px;
+  width: 100%;
+  background-repeat: repeat-x;
+  background-image: url("./images/map.png");
+  background-size: auto 480px;
+}
+
+.map .poke-trainer {
+  position: absolute;
+  height: auto;
+  width: 96px;
+  bottom: 92px;
+  left: 50%;
+}
+
+.map .poke-trainer.left {
+  transform: scaleX(1) translateX(-50%);
+}
+
+.map .poke-trainer.right {
+  transform: scaleX(-1) translateX(50%);
+}
+
+.modal-shade {
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content, .modal-loading {
+  width: 90%;
+  max-width: 480px;
+  height: 320px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.modal-content {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.modal-content .sprite {
+  height: 45%;
+  width: auto;
+}
+
+.modal-loading {
+  background-color: #181B1D;
+}
+
+.modal-loading img {
+  width: 100%;
+  height: auto;
+}
+
+.modal-actions {
+  display: flex;
+}
+
+.modal-button {
+  text-align: center;
+  border: 2px solid #333;
+  padding: 5px 30px;
+  margin: 10px;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+.modal-button span {
+  display: block;
+  font-size: .6em;
+  font-weight: normal;
+}
+
+.caught-pokemon {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+
+.caught-pokemon img {
+  width: auto;
+  height: 100px;
+}
