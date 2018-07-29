@@ -9,13 +9,20 @@ body {
   align-items: center;
 }
 
-.map {
+.map, .sky {
   position: relative;
-  height: 480px;
   width: 100%;
   background-repeat: repeat-x;
   background-image: url("./images/map.png");
   background-size: auto 480px;
+}
+
+.map {
+  height: 480px;
+}
+
+.sky {
+  height: 300px;
 }
 
 .map .poke-trainer {
