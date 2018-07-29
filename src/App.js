@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import PokeMap from './components/PokeMap';
+import PokeStats from './components/PokeStats';
 import PokeTrainer from './components/PokeTrainer';
 import PokeEncounter from './components/PokeEncounter';
 import PokeCaught from './components/PokeCaught';
@@ -21,14 +22,16 @@ class App extends Component {
       mapPosition: 0,
       isWalking: false,
       direction: 'right',
+      ballCount: 0,
       pokemon: [],
       wildPokemon: null
     }
   }
 
   _pokemonRange = 151;
-  _encounterRate = .03;
-  _catchRate = .3;
+  _encounterRate = .05;
+  _catchRate = .15;
+  _ballRate = 0.10;
   _walkSpeed = 32;
 
   componentDidMount() {
@@ -54,10 +57,12 @@ class App extends Component {
   }
 
   _walk(direction) {
+    const { isWalking, ballCount } = this.state;
     const plusMinus = direction === 'right' ? -1 : 1;
     this.setState({
-      isWalking: !this.state.isWalking,
+      isWalking: !isWalking,
       direction,
+      ballCount: ballCount + 1,
       mapPosition: this.state.mapPosition + (this._walkSpeed * plusMinus)
     }, () => {
       if (this._encounterRate >= Math.random()) {
@@ -103,15 +108,22 @@ class App extends Component {
   }
 
   _onCatch() {
-    const { pokemon, wildPokemon } = this.state;
-    if (this._catchRate < Math.random()) {
-      this.setState({
-        pokemon: [...pokemon, wildPokemon],
-      })
-    }
+    const { ballCount, pokemon, wildPokemon } = this.state;
+    const singleBall = 1/this._ballRate;
     this.setState({
-      inBattle: false
-    })
+      ballCount: ballCount - singleBall
+    }, () => {
+      if (this._catchRate >= Math.random()) {
+        this.setState({
+          pokemon: [...pokemon, wildPokemon],
+          inBattle: false
+        });
+      } else if (this.state.ballCount < singleBall) {
+        this.setState({
+          inBattle: false
+        });
+      }
+    });
   }
 
   _getAppProps() {
@@ -129,12 +141,14 @@ class App extends Component {
       mapPosition,
       isWalking,
       direction,
+      ballCount,
       pokemon,
       wildPokemon
     } = this.state;
     return (
       <div {...this._getAppProps()}>
         <PokeMap mapPosition={mapPosition}>
+          <PokeStats ballCount={ballCount} ballRate={this._ballRate}/>
           <PokeTrainer isWalking={isWalking} direction={direction} />
           <PokeCaught pokemon={pokemon} />
           <PokeEncounter

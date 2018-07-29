@@ -10,15 +10,13 @@ export default (props) => {
     <div className='modal-shade' style={styles}>
       <div className='modal-content'>
         <img className="sprite" src={wildPokemon.sprites.front_default} alt={wildPokemon.sprites.front_default} />
-        <h1><small>A wild {_.capitalize(wildPokemon.name)} appeared!</small></h1>
-        <div className="modal-actions">
-          <button tabIndex='-1' className="modal-button" onClick={onRun}>
-            Run<span>(escape)</span>
+        <p><small>A wild {_.capitalize(wildPokemon.name)} appeared!</small></p>
+          <button tabIndex='-1' className="modal-catch" onClick={onCatch}>
+            Catch
           </button>
-          <button tabIndex='-1' className="modal-button" onClick={onCatch}>
-            Catch<span>(enter)</span>
+          <button tabIndex='-1' className="modal-run" onClick={onRun}>
+            Run Away
           </button>
-        </div>
       </div>
     </div>
   )
