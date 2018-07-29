@@ -1,25 +1,41 @@
 import React from 'react';
+import _ from 'lodash';
+import { Spring } from 'react-spring';
+import { TimingAnimation, Easing } from 'react-spring/dist/addons';
 
-const EncounterPokemon = (props) => {
+export default (props) => {
   const { wildPokemon, inBattle, onRun, onCatch } = props;
-  if (!inBattle) { return false }
-  const name = wildPokemon.name.charAt(0).toUpperCase() + wildPokemon.name.substring(1);
-  return (
-    <div className='modal-shade'>
+
+  const content = (styles) => (
+    <div className='modal-shade' style={styles}>
       <div className='modal-content'>
         <img className="sprite" src={wildPokemon.sprites.front_default} alt={wildPokemon.sprites.front_default} />
-        <h1><small>A wild {name} appeared!</small></h1>
+        <h1><small>A wild {_.capitalize(wildPokemon.name)} appeared!</small></h1>
         <div className="modal-actions">
-          <button className="modal-button" onClick={onRun}>
+          <button tabIndex='-1' className="modal-button" onClick={onRun}>
             Run<span>(escape)</span>
           </button>
-          <button className="modal-button" onClick={onCatch}>
+          <button tabIndex='-1' className="modal-button" onClick={onCatch}>
             Catch<span>(enter)</span>
           </button>
         </div>
       </div>
     </div>
-  );
+  )
+  const from = {
+    opacity: 0
+  }
+  const to = {
+    opacity: inBattle ? 1 : 0
+  }
+  return wildPokemon ? (
+    <Spring
+      from={from}
+      to={to}
+      impl={TimingAnimation}
+      config={{ duration: 200, easing: Easing.cubic }}
+    >
+      {content}
+    </Spring>
+  ) : null;
 }
-
-export default EncounterPokemon;

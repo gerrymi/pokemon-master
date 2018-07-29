@@ -1,5 +1,5 @@
-import './App.css';
 import React, { Component } from 'react';
+import './App.css';
 import PokeMap from './components/PokeMap';
 import PokeTrainer from './components/PokeTrainer';
 import EncounterPokemon from './components/EncounterPokemon';
@@ -27,7 +27,7 @@ class App extends Component {
   }
 
   _pokemonRange = 151;
-  _encounterRate = .05;
+  _encounterRate = .03;
   _catchRate = .3;
   _walkSpeed = 32;
 
@@ -49,7 +49,7 @@ class App extends Component {
           wildPokemon: json,
           isLoading: false,
           inBattle: true
-        })
+        });
       });
   }
 
@@ -73,7 +73,6 @@ class App extends Component {
   }
 
   _keyDownHandler(e) {
-    console.log(e.keyCode)
     if (this.state.inBattle) {
       if (e.keyCode === 27) {
         this._onRun();
@@ -87,7 +86,7 @@ class App extends Component {
       }
       if (e.keyCode === 37) {
         this._walk('left');
-      } 
+      }
     }
   }
 
@@ -100,7 +99,7 @@ class App extends Component {
   _onRun() {
     this.setState({
       inBattle: false
-    })
+    });
   }
 
   _onCatch() {
@@ -117,11 +116,11 @@ class App extends Component {
 
   _getAppProps() {
     return {
+      ref: (r) => this._app = r,
       className: 'App',
-      onKeyDown: this._keyDownHandler,
-      onKeyUp: this._keyUpHandler,
       tabIndex: '0',
-      ref: (r) => this._app = r
+      onKeyDown: this._keyDownHandler,
+      onKeyUp: this._keyUpHandler
     }
   }
   render() {
@@ -138,13 +137,13 @@ class App extends Component {
         <PokeMap mapPosition={mapPosition}>
           <PokeTrainer isWalking={isWalking} direction={direction} />
           <CaughtPokemon pokemon={pokemon} />
+          <EncounterPokemon
+            wildPokemon={wildPokemon}
+            inBattle={inBattle}
+            onRun={this._onRun}
+            onCatch={this._onCatch}
+          />
         </PokeMap>
-        <EncounterPokemon
-          wildPokemon={wildPokemon}
-          inBattle={inBattle}
-          onRun={this._onRun}
-          onCatch={this._onCatch}
-        />
       </div>
     );
   }
