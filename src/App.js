@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import PokeMap from './components/PokeMap';
 import PokeTrainer from './components/PokeTrainer';
-import EncounterPokemon from './components/EncounterPokemon';
-import CaughtPokemon from './components/CaughtPokemon';
+import PokeEncounter from './components/PokeEncounter';
+import PokeCaught from './components/PokeCaught';
 
 class App extends Component {
   constructor(props) {
@@ -136,8 +136,8 @@ class App extends Component {
       <div {...this._getAppProps()}>
         <PokeMap mapPosition={mapPosition}>
           <PokeTrainer isWalking={isWalking} direction={direction} />
-          <CaughtPokemon pokemon={pokemon} />
-          <EncounterPokemon
+          <PokeCaught pokemon={pokemon} />
+          <PokeEncounter
             wildPokemon={wildPokemon}
             inBattle={inBattle}
             onRun={this._onRun}
