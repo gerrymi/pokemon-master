@@ -1,3 +1,4 @@
+/* App */
 body {
   background-color: black;
   margin: 0;
@@ -17,6 +18,7 @@ body {
   align-items: center;
 }
 
+/* Map */
 .map, .sky {
   position: relative;
   width: 100%;
@@ -33,7 +35,8 @@ body {
   height: 300px;
 }
 
-.map .poke-trainer {
+/* Trainer */
+.poke-trainer {
   position: absolute;
   height: auto;
   width: 96px;
@@ -41,14 +44,15 @@ body {
   left: 50%;
 }
 
-.map .poke-trainer.left {
+.poke-trainer.left {
   transform: scaleX(1) translateX(-50%);
 }
 
-.map .poke-trainer.right {
+.poke-trainer.right {
   transform: scaleX(-1) translateX(50%);
 }
 
+/* Modal */
 .modal-shade {
   background-color: rgba(0, 0, 0, 0.6);
   position: absolute;
@@ -78,20 +82,56 @@ body {
   padding: 1em;
 }
 
-.modal-content .sprite {
-  height: 45%;
-  width: auto;
+/* WildPokemon */
+.wild-pokemon {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+}
+
+.wild-pokemon .sprite-pokemon {
+  height: 100px;
+  mask-mode: 'alpha';
+  mask-repeat: no-repeat;
+  mask-position: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-blend-mode: multiply;
+}
+
+.wild-pokemon .sprite-pokeball {
+  position: absolute;
+  height: 256px;
+}
+
+.wild-pokemon .sprite-pokeball img {
+  width: 32px;
+}
+
+.modal-catch, .modal-run {
+  border: none;
 }
 
 .modal-catch {
-  text-align: center;
-  padding: 1em 2em;
   background-color: dodgerblue;
+  padding: 1em 3em;
+  margin: 1em;
   color: white;
 }
 
 .modal-run {
   color: dodgerblue;
+}
+
+.modal-catch:disabled {
+  background-color: #999;
+}
+
+.modal-run:disabled {
+  color: #999;
 }
 
 .caught-pokemon {
