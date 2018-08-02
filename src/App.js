@@ -58,6 +58,7 @@ class App extends Component {
           inBattle: true,
           catching: null,
           caught: false,
+          gotOut: false,
         });
       });
   }
