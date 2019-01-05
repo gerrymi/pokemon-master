@@ -4,11 +4,11 @@
   "private": true,
   "homepage": "http://gerrymi.github.io/pokemon-master",
   "dependencies": {
-    "lodash": "^4.17.10",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-scripts": "1.1.4",
-    "react-spring": "^5.4.4"
+    "lodash": "^4.17.11",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-scripts": "^2.1.3",
+    "react-spring": "^7.2.8"
   },
   "scripts": {
     "start": "react-scripts start",
